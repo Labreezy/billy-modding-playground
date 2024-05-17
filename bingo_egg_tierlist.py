@@ -160,8 +160,23 @@ if __name__ == '__main__':
     fig, ax = plt.subplots()
     g = ig.Graph(56, edgelist, directed=True)
 
-    ig.plot(g,target=ax,vertex_color="steelblue",vertex_size=10,vertex_label=list(map(str,all_levels)))
-    plt.show()
+    result_lens = [len(p) for p in g.get_shortest_paths(0)]
+    REMAINING_EGGS = EGG_NAMES.copy()
+    EGG_MIN_LEVEL_CLEARS = [999]*len(EGG_NAMES)
+    for i in range(0,len(result_lens)):
+        e_list = all_levels[i].egglist
+        pathlength = result_lens[i]
+        for egg in e_list:
+            egg_idx = EGG_NAMES.index(egg)
+            if pathlength < EGG_MIN_LEVEL_CLEARS[egg_idx]:
+                EGG_MIN_LEVEL_CLEARS[egg_idx] = pathlength
+
+
+    eggcleardata = [(e,n) for e,n in zip(EGG_NAMES, EGG_MIN_LEVEL_CLEARS)]
+    eggcleardata.sort(key=lambda e: e[1])
+
+    for egg, n_levels in eggcleardata:
+        print(f"{egg}, {n_levels} Level(s)")
 
 
 
