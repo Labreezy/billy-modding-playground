@@ -3,7 +3,7 @@ import json
 import re
 import igraph as ig
 import matplotlib.pyplot as plt
-
+from billy_data import EXCLUDE_EGGS, SHORT_EXCLUDE_WORLDS
 LEVEL_REGEX = re.compile(r"obj_([a-z]+)([1-8])\.json")
 
 LONGNAMES = {
@@ -123,7 +123,6 @@ if __name__ == '__main__':
             lvl = Level(world,int(mnum),get_egglist_from_json(fn))
             all_levels.append(lvl)
             all_levels.sort(key=lambda l: WORLD_ORDER.index(l.world)*8+l.missionnum)
-    print(list(map(str, all_levels)))
     for world in range(7):
         #generic conditions
         for m in range(4):
@@ -163,6 +162,7 @@ if __name__ == '__main__':
     result_lens = [len(p) for p in g.get_shortest_paths(0)]
     REMAINING_EGGS = EGG_NAMES.copy()
     EGG_MIN_LEVEL_CLEARS = [999]*len(EGG_NAMES)
+    EGG_MIN_LEVEL_CLEAR_NAMES = [None]*len(EGG_MIN_LEVEL_CLEARS)
     for i in range(0,len(result_lens)):
         e_list = all_levels[i].egglist
         pathlength = result_lens[i]
@@ -170,13 +170,18 @@ if __name__ == '__main__':
             egg_idx = EGG_NAMES.index(egg)
             if pathlength < EGG_MIN_LEVEL_CLEARS[egg_idx]:
                 EGG_MIN_LEVEL_CLEARS[egg_idx] = pathlength
+                EGG_MIN_LEVEL_CLEAR_NAMES[egg_idx] = all_levels[i]
 
 
-    eggcleardata = [(e,n) for e,n in zip(EGG_NAMES, EGG_MIN_LEVEL_CLEARS)]
-    eggcleardata.sort(key=lambda e: e[1])
+    eggcleardata = [(e,n) for e,n in zip(EGG_NAMES, EGG_MIN_LEVEL_CLEAR_NAMES) if n is not None]
+    eggcleardata.sort(key=lambda e: WORLD_ORDER.index(e[1].world)*8+e[1].missionnum)
 
-    for egg, n_levels in eggcleardata:
-        print(f"{egg}, {n_levels} Level(s)")
+    for egg, level in eggcleardata:
+        if level is None:
+            continue
+        if egg in EXCLUDE_EGGS:
+            continue
+        print(f"Hatch a {egg} egg and finish ({str(level)})")
 
 
 
