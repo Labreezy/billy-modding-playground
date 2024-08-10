@@ -20,6 +20,11 @@ def sanitize_param(p):
     if type(p) == bytes:
         return b2a_hex(p).decode("utf-8")
     return p
+
+def reverse_sanitize_param(p):
+    if type(p) == str:
+        return binascii.a2b_hex(p)
+    return p
 def parse_set(setf,db=None,entry_size=0x40,paramfmt=""):
     if db is not None:
         reverse_db = {v: k for k, v in db.items()}
@@ -55,11 +60,37 @@ def parse_set(setf,db=None,entry_size=0x40,paramfmt=""):
     out_obj['data'] = datalist
     return out_obj
 
+def rebuild_set(jsonobj, db={}, paramfmt=""):
+    out_bytes = b''
+    reversedb = {v: k for k,v in db.items()}
+    entry_size = jsonobj['entry_size']
+    out_fsize = jsonobj['fsize']
+    if paramfmt == "":
+        paramfmt = f">I3f{entry_size-0x10}s"
+    else:
+        paramfmt = ">I3f" + paramfmt[1:]
+    for obj in jsonobj['data']:
+        if obj['name'] in reversedb.keys():
+            obj_id = int(reversedb[obj['name']])
+        else:
+            obj_id = int(obj['name'][3:])
+        paramlst = [obj_id]
+        x,nz,y = obj['position']
+        paramlst.extend([x,y,-nz])
+        parsed_params = list(map(reverse_sanitize_param, obj['params']))
+        paramlst.extend(parsed_params)
+        out_bytes += struct.pack(paramfmt,*paramlst)
+    return out_bytes.ljust(out_fsize, b'\x00')
+
+
+
+
 
 
 obj_db = json.load(open('db/obj_db.json'))
 ene_db = json.load(open('db/ene_db.json'))
-for setfn in glob(osp.join(BILLY_DIR,"set_???_*.bin")):
+
+if setfn.endswith("bin"):
     datalist = []
     if "obj" in setfn:
         with open(setfn,'rb') as setf:
@@ -77,29 +108,20 @@ for setfn in glob(osp.join(BILLY_DIR,"set_???_*.bin")):
             json.dump(parsed_set, open(outfn, "w"), indent=2)
     else:
         print(f"Unrecognized filetype with name {setfn}")
-print("Done")
-""" elif setfn.endswith("json"):
+
+elif setfn.endswith("json"):
+        print("Parsing " + setfn)
         objdata = json.load(open(setfn))
         base, ext = osp.splitext(setfn)
         with open(base + "_out.bin",'wb') as binf:
-            for obj in objdata['data']:
-                if obj['name'].startswith("unk"):
-                    id = int(obj['name'][3:])
-                else:
-                    id = int(reverse_db[obj['name']])
-                x,nz,y = obj['position']
-
-                extrabytes = struct.pack('>4H',*obj['shortparams'])
-                extrabytes += struct.pack('>5i',*obj['intparams'])
-                extrabytes += struct.pack('>5f', *obj['floatparams'])
-
-                binf.write(struct.pack(fmt,id,x,y,-nz,extrabytes))
-            while binf.tell() < objdata['fsize']:
-                binf.write(empty_dat)
+            if "obj" in setfn:
+                set_bytes = rebuild_set(objdata, obj_db, ">4H5i5f")
+                binf.write(set_bytes)
+            elif "ene" in setfn:
+                set_bytes = rebuild_set(objdata, ene_db, ">3s4s5s2H16s4I3f4s")
         print("Done")
-    else:
-        print("wtf did you give me man")
-        """
+else:
+    print("wtf did you give me man")
 
 
 

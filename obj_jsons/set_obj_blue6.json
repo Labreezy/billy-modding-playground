@@ -1683,7 +1683,7 @@
       ]
     },
     {
-      "name": "checkpoint",
+      "name": "checkpointtrigger",
       "position": [
         1033.098388671875,
         494.55157470703125,
@@ -1707,7 +1707,7 @@
       ]
     },
     {
-      "name": "unk15",
+      "name": "respawnpoint",
       "position": [
         1033.098388671875,
         531.1594848632812,
@@ -1851,7 +1851,7 @@
       ]
     },
     {
-      "name": "checkpoint",
+      "name": "checkpointtrigger",
       "position": [
         -175.87777709960938,
         174.61993408203125,
@@ -2427,7 +2427,7 @@
       ]
     },
     {
-      "name": "unk15",
+      "name": "respawnpoint",
       "position": [
         525.6992797851562,
         -104.31131744384766,
@@ -2451,7 +2451,7 @@
       ]
     },
     {
-      "name": "checkpoint",
+      "name": "checkpointtrigger",
       "position": [
         511.2999267578125,
         -15.88789176940918,
@@ -2595,7 +2595,7 @@
       ]
     },
     {
-      "name": "unk15",
+      "name": "respawnpoint",
       "position": [
         -276.1738586425781,
         -1696.7396240234375,
@@ -2619,7 +2619,7 @@
       ]
     },
     {
-      "name": "checkpoint",
+      "name": "checkpointtrigger",
       "position": [
         -262.4430236816406,
         -1699.2222900390625,

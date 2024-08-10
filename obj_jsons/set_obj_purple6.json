@@ -435,7 +435,7 @@
       ]
     },
     {
-      "name": "checkpoint",
+      "name": "checkpointtrigger",
       "position": [
         -15.986565589904785,
         1301.5208740234375,

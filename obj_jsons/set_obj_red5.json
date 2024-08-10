@@ -1155,7 +1155,7 @@
       ]
     },
     {
-      "name": "unk15",
+      "name": "respawnpoint",
       "position": [
         -1384.1402587890625,
         971.2996215820312,
@@ -2307,7 +2307,7 @@
       ]
     },
     {
-      "name": "unk15",
+      "name": "respawnpoint",
       "position": [
         -750.8115234375,
         312.31329345703125,
@@ -2331,7 +2331,7 @@
       ]
     },
     {
-      "name": "unk15",
+      "name": "respawnpoint",
       "position": [
         -373.52655029296875,
         -182.27130126953125,
@@ -2739,7 +2739,7 @@
       ]
     },
     {
-      "name": "checkpoint",
+      "name": "checkpointtrigger",
       "position": [
         -753.2772216796875,
         219.16197204589844,
@@ -2859,7 +2859,7 @@
       ]
     },
     {
-      "name": "checkpoint",
+      "name": "checkpointtrigger",
       "position": [
         -1124.8602294921875,
         -53.96974182128906,
@@ -2883,7 +2883,7 @@
       ]
     },
     {
-      "name": "unk15",
+      "name": "respawnpoint",
       "position": [
         -1110.3162841796875,
         -59.6544303894043,
@@ -3843,7 +3843,7 @@
       ]
     },
     {
-      "name": "checkpoint",
+      "name": "checkpointtrigger",
       "position": [
         -91.04151916503906,
         -233.81504821777344,
@@ -4203,7 +4203,7 @@
       ]
     },
     {
-      "name": "unk15",
+      "name": "respawnpoint",
       "position": [
         -973.3911743164062,
         826.54345703125,
@@ -4227,7 +4227,7 @@
       ]
     },
     {
-      "name": "checkpoint",
+      "name": "checkpointtrigger",
       "position": [
         -984.0244750976562,
         807.5862426757812,
@@ -5451,7 +5451,7 @@
       ]
     },
     {
-      "name": "checkpoint",
+      "name": "checkpointtrigger",
       "position": [
         -1436.9501953125,
         991.6575927734375,
@@ -5667,7 +5667,7 @@
       ]
     },
     {
-      "name": "unk15",
+      "name": "respawnpoint",
       "position": [
         870.158447265625,
         574.7508544921875,
@@ -5691,7 +5691,7 @@
       ]
     },
     {
-      "name": "checkpoint",
+      "name": "checkpointtrigger",
       "position": [
         904.19287109375,
         546.8140258789062,

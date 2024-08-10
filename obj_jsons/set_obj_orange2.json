@@ -1011,7 +1011,7 @@
       ]
     },
     {
-      "name": "unk15",
+      "name": "respawnpoint",
       "position": [
         1558.0196533203125,
         -1017.349365234375,
@@ -2979,7 +2979,7 @@
       ]
     },
     {
-      "name": "checkpoint",
+      "name": "checkpointtrigger",
       "position": [
         1846.376220703125,
         -617.35400390625,
@@ -3003,7 +3003,7 @@
       ]
     },
     {
-      "name": "checkpoint",
+      "name": "checkpointtrigger",
       "position": [
         2104.96826171875,
         -1796.2047119140625,
@@ -3027,7 +3027,7 @@
       ]
     },
     {
-      "name": "unk15",
+      "name": "respawnpoint",
       "position": [
         2117.44580078125,
         -1675.65234375,
